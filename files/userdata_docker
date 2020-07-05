@@ -1,21 +1,26 @@
 #!/bin/bash -x
 
+
+# Install docker
 if [ `command -v curl` ]; then
   curl -sL https://releases.rancher.com/install-docker/${docker_version_server}.sh | sh
 elif [ `command -v wget` ]; then
   wget -qO- https://releases.rancher.com/install-docker/${docker_version_server}.sh | sh
 fi
-#user=$(whoami)
 
+# Add user into docker group
 sudo usermod -aG docker ${user}
-#sudo usermod -aG docker ubuntu
 
+# Clone the testing-applications repo
 git clone https://github.com/nickngch/testing-applications.git
 
+# Install docker-compose 
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
 
+
+# Start application
 cd ./testing-applications
 
 sed -i 's/example.com/${dns}/g' .env
