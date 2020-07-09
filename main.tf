@@ -42,6 +42,7 @@ data "template_file" "userdata_docker" {
    user = var.user
    app = var.app
    dns = var.dns
+   https = var.https
   }
 }
 

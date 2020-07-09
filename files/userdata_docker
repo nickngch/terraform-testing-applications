@@ -25,6 +25,11 @@ cd ./testing-applications
 
 sed -i 's/example.com/${dns}/g' .env
 
-chmod +x bootstrap.sh
+if [ ${https} =  false ]; then
+  chmod +x bootstrap.sh
+  ./bootstrap.sh ${app}
+else
+  chmod +x bootstrap_https.sh
+  ./bootstrap_https.sh ${app}
+fi
 
-./bootstrap.sh ${app}

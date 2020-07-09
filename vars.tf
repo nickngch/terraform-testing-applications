@@ -70,3 +70,8 @@ variable "elasticsearch_subdomain" {
 variable "registry_subdomain" {
   default = "registry"
 }
+
+variable "https" {
+  default = false
+  type = bool
+}
